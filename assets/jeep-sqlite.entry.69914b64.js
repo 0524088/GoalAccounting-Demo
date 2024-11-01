@@ -1,4 +1,4 @@
-import { r as registerInstance, c as createEvent, g as getElement } from "./index.8c427052.js";
+import { r as registerInstance, c as createEvent, g as getElement } from "./index.32479f02.js";
 const global$1 = typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {};
 function defaultSetTimout() {
   throw new Error("setTimeout has not been defined");

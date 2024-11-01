@@ -1,4 +1,4 @@
-import { W as WebPlugin } from "./index.8c427052.js";
+import { W as WebPlugin } from "./index.32479f02.js";
 class AppWeb extends WebPlugin {
   constructor() {
     super();

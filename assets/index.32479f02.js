@@ -576,7 +576,7 @@ registerPlugin("CapacitorHttp", {
   web: () => new CapacitorHttpPluginWeb()
 });
 const Preferences = registerPlugin("Preferences", {
-  web: () => __vitePreload(() => import("./web.51e5187d.js"), true ? [] : void 0).then((m) => new m.PreferencesWeb())
+  web: () => __vitePreload(() => import("./web.6e9e1744.js"), true ? [] : void 0).then((m) => new m.PreferencesWeb())
 });
 async function storage_setItem(key, value) {
   await Preferences.set({
@@ -3196,10 +3196,10 @@ var Encoding;
   Encoding2["UTF16"] = "utf16";
 })(Encoding || (Encoding = {}));
 registerPlugin("Filesystem", {
-  web: () => __vitePreload(() => import("./web.fc6f798b.js"), true ? [] : void 0).then((m) => new m.FilesystemWeb())
+  web: () => __vitePreload(() => import("./web.ef45658f.js"), true ? [] : void 0).then((m) => new m.FilesystemWeb())
 });
 const App = registerPlugin("App", {
-  web: () => __vitePreload(() => import("./web.f2923139.js"), true ? [] : void 0).then((m) => new m.AppWeb())
+  web: () => __vitePreload(() => import("./web.6d8ae252.js"), true ? [] : void 0).then((m) => new m.AppWeb())
 });
 const custom$1 = {
   BarAlertRange: {
@@ -5912,11 +5912,10 @@ let sortableInstance;
 async function initDataContent(DataValue2, UserSettingValue2) {
   const keyArray = Object.keys(DataValue2);
   UserSettingValue2.CurrentDateKey = keyArray[keyArray.length - 1];
-  let UserSetting2 = await initUserSetting();
-  await UserSetting2.set(UserSettingValue2);
   renderCarouselData(UserSettingValue2.CurrentDateKey);
   renderDataContent(DataValue2, UserSettingValue2);
   renderUserSettingContent(UserSettingValue2);
+  renderAccountingDetail(DataValue2[UserSettingValue2.CurrentDateKey]["items"], "\u7E3D\u89BD");
 }
 function renderDataContent(data, { CurrentDateKey: CurrentDateKey2, ...param }) {
   const HomeContent = document.querySelector("#home-content");
@@ -5973,6 +5972,20 @@ function renderItemsHTML(data, mode) {
     html += "<div class='text-center h4'>\u5C1A\u672A\u5EFA\u7ACB\u76EE\u6A19\uFF0C\u8ACB\u5148\u65B0\u589E</div>";
   }
   return total_html + html;
+}
+function renderAccountingOption(names) {
+  let html = "";
+  let is_unset = false;
+  for (let name of names) {
+    if (name === "\u7E3D\u89BD") {
+      continue;
+    }
+    if (name === "\u5176\u4ED6\u82B1\u8CBB") {
+      is_unset = true;
+    }
+    html += renderAccountingOptionHTML(name, is_unset);
+  }
+  document.querySelector(".goal-options").innerHTML = html;
 }
 function renderBarHTML(item, param, isGoal) {
   var _a;
@@ -6174,7 +6187,6 @@ function renderAccountingDetail(items, goal) {
     acc[date].items.push(item);
     return acc;
   }, {});
-  console.log(groupedByDate);
   let html = "";
   for (let group in groupedByDate) {
     let acc_html = "";
@@ -6259,6 +6271,7 @@ function renderSortable(element) {
       const newOrder = sortableInstance.toArray();
       newOrder.shift(0);
       await updateDataItemsSort(newOrder);
+      renderAccountingOption(getAccountings());
     }
   });
 }
@@ -7096,7 +7109,7 @@ async function initEventListener() {
     Pickr2.setColor(getRandomLightColor());
   });
   InputModal.addEventListener("click", async (element) => {
-    var _a, _b;
+    var _a, _b, _c;
     const target = element.target;
     const inputs = InputModal.querySelectorAll("input");
     const keyName = inputs[0].value;
@@ -7202,6 +7215,9 @@ async function initEventListener() {
       case "close":
         reset();
         break;
+    }
+    if (((_c = target.dataset) == null ? void 0 : _c.action) !== "close") {
+      renderAccountingOption(UserSettingValue$1.CurrentAccountings);
     }
     function check(key) {
       if (checkInput() && checkKeyDuplicate(key))
@@ -7381,6 +7397,7 @@ async function initEventListener() {
         const select = document.querySelector(".goal-options");
         select.value = goal;
         AccountingDetail.dataset.target = goal;
+        UserSettingValue$1.CurrentAccountingIndex = UserSettingValue$1.CurrentAccountings.indexOf(goal);
         await toggleAccounting(UserSettingValue$1.CurrentAccountingIndex);
         GoalDetailModal_bs.hide();
         Nav.querySelector(".nav-link[data-tab-target='#accountingDetail']").click();
@@ -7535,7 +7552,7 @@ async function initEventListener() {
     const itemParent = target.closest(".accounting-item");
     const groupParent = target.closest(".accounting-group");
     if (itemParent) {
-      const goal = groupParent.querySelector(".accounting-goal").dataset.goal;
+      const goal = itemParent.querySelector(".accounting-goal").dataset.goal;
       const name = itemParent.querySelector(".accounting-name").textContent;
       let date = groupParent.querySelector(".accounting-date").dataset.date;
       date = date.replace(/(\d{4})\/(\d{1,2})\/(\d{1,2})/, (match, year, month, day) => {
@@ -7885,6 +7902,9 @@ async function updateDataItemsSort(newOrder) {
   await Data$1.set(DataValue$1);
   await refreshAccountings();
 }
+function getAccountings() {
+  return UserSettingValue$1.CurrentAccountings;
+}
 const NAMESPACE = "jeep-sqlite";
 const BUILD = { allRenderFn: true, appendChildSlotFix: false, asyncLoading: true, asyncQueue: false, attachStyles: true, cloneNodeFix: false, cmpDidLoad: true, cmpDidRender: false, cmpDidUnload: false, cmpDidUpdate: false, cmpShouldUpdate: false, cmpWillLoad: true, cmpWillRender: false, cmpWillUpdate: false, connectedCallback: true, constructableCSS: true, cssAnnotations: true, devTools: false, disconnectedCallback: false, element: false, event: true, experimentalScopedSlotChanges: false, experimentalSlotFixes: false, formAssociated: false, hasRenderFn: true, hostListener: false, hostListenerTarget: false, hostListenerTargetBody: false, hostListenerTargetDocument: false, hostListenerTargetParent: false, hostListenerTargetWindow: false, hotModuleReplacement: false, hydrateClientSide: false, hydrateServerSide: false, hydratedAttribute: false, hydratedClass: true, hydratedSelectorName: "hydrated", initializeNextTick: false, invisiblePrehydration: true, isDebug: false, isDev: false, isTesting: false, lazyLoad: true, lifecycle: true, lifecycleDOMEvents: false, member: true, method: true, mode: false, observeAttribute: true, profile: false, prop: true, propBoolean: true, propMutable: false, propNumber: false, propString: true, reflect: true, scoped: false, scopedSlotTextContentFix: false, scriptDataOpts: false, shadowDelegatesFocus: false, shadowDom: true, slot: false, slotChildNodesFix: false, slotRelocation: false, state: true, style: true, svg: false, taskQueue: true, transformTagName: false, updatable: true, vdomAttribute: true, vdomClass: false, vdomFunctional: false, vdomKey: false, vdomListener: false, vdomPropOrAttr: true, vdomRef: false, vdomRender: false, vdomStyle: false, vdomText: false, vdomXlink: false, watchCallback: true };
 var __defProp2 = Object.defineProperty;
@@ -7934,7 +7954,7 @@ var loadModule = (cmpMeta, hostRef, hmrVersionId) => {
       case "jeep-sqlite":
         return __vitePreload(() => import(
           /* webpackMode: "lazy" */
-          "./jeep-sqlite.entry.dff7c44f.js"
+          "./jeep-sqlite.entry.69914b64.js"
         ), true ? [] : void 0).then(processMod, consoleError);
     }
   }
@@ -8984,7 +9004,7 @@ const defineCustomElements = async (win2, options) => {
   }
 })();
 registerPlugin("CapacitorSQLite", {
-  web: () => __vitePreload(() => import("./web.7c777e7a.js"), true ? [] : void 0).then((m) => new m.CapacitorSQLiteWeb()),
+  web: () => __vitePreload(() => import("./web.0a8252aa.js"), true ? [] : void 0).then((m) => new m.CapacitorSQLiteWeb()),
   electron: () => window.CapacitorCustomPlatform.plugins.CapacitorSQLite
 });
 defineCustomElements();
