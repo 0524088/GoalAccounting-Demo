@@ -48,7 +48,7 @@ const p = function polyfill() {
 p();
 const scriptRel = "modulepreload";
 const seen = {};
-const base = "/Accounting-Web-App-Demo/";
+const base = "./";
 const __vitePreload = function preload(baseModule, deps) {
   if (!deps || deps.length === 0) {
     return baseModule();
@@ -576,7 +576,7 @@ registerPlugin("CapacitorHttp", {
   web: () => new CapacitorHttpPluginWeb()
 });
 const Preferences = registerPlugin("Preferences", {
-  web: () => __vitePreload(() => import("./web.2baa359b.js"), true ? [] : void 0).then((m) => new m.PreferencesWeb())
+  web: () => __vitePreload(() => import("./web.5d318454.js"), true ? [] : void 0).then((m) => new m.PreferencesWeb())
 });
 async function storage_setItem(key, value) {
   await Preferences.set({
@@ -3196,10 +3196,10 @@ var Encoding;
   Encoding2["UTF16"] = "utf16";
 })(Encoding || (Encoding = {}));
 registerPlugin("Filesystem", {
-  web: () => __vitePreload(() => import("./web.9a4189f5.js"), true ? [] : void 0).then((m) => new m.FilesystemWeb())
+  web: () => __vitePreload(() => import("./web.43a16506.js"), true ? [] : void 0).then((m) => new m.FilesystemWeb())
 });
 const App = registerPlugin("App", {
-  web: () => __vitePreload(() => import("./web.13bf9e56.js"), true ? [] : void 0).then((m) => new m.AppWeb())
+  web: () => __vitePreload(() => import("./web.01bb140a.js"), true ? [] : void 0).then((m) => new m.AppWeb())
 });
 const custom$1 = {
   BarAlertRange: {
@@ -7927,7 +7927,7 @@ var loadModule = (cmpMeta, hostRef, hmrVersionId) => {
       case "jeep-sqlite":
         return __vitePreload(() => import(
           /* webpackMode: "lazy" */
-          "./jeep-sqlite.entry.bba5338a.js"
+          "./jeep-sqlite.entry.4ebc1427.js"
         ), true ? [] : void 0).then(processMod, consoleError);
     }
   }
@@ -8977,7 +8977,7 @@ const defineCustomElements = async (win2, options) => {
   }
 })();
 registerPlugin("CapacitorSQLite", {
-  web: () => __vitePreload(() => import("./web.8f33622c.js"), true ? [] : void 0).then((m) => new m.CapacitorSQLiteWeb()),
+  web: () => __vitePreload(() => import("./web.e7bd51fc.js"), true ? [] : void 0).then((m) => new m.CapacitorSQLiteWeb()),
   electron: () => window.CapacitorCustomPlatform.plugins.CapacitorSQLite
 });
 defineCustomElements();
@@ -8993,6 +8993,9 @@ window.addEventListener("DOMContentLoaded", async () => {
   await initDataContent(DataValue, UserSettingValue);
   await initEventListener();
   LocateHomePage();
+  {
+    document.querySelector("#setting-debug").classList.add("d-none");
+  }
   setTimeout(() => {
     document.querySelector("#app-loading").classList.add("d-none");
     document.querySelector("#app").classList.remove("d-none");

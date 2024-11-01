@@ -1,4 +1,4 @@
-import { W as WebPlugin } from "./index.b7bbee15.js";
+import { W as WebPlugin } from "./index.6e032204.js";
 class CapacitorSQLiteWeb extends WebPlugin {
   constructor() {
     super(...arguments);
