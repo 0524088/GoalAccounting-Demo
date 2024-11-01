@@ -36,4 +36,4 @@
 https://0524088.github.io/AccountingWebApp-Demo/
 
 ## Using By Android Apk
-下載並在 Android 裝置上安裝 "餘額式記帳.apk"
+下載並在 Android 裝置上安裝 "goal_accounting.apk"
