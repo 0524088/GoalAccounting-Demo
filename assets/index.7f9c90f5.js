@@ -576,7 +576,7 @@ registerPlugin("CapacitorHttp", {
   web: () => new CapacitorHttpPluginWeb()
 });
 const Preferences = registerPlugin("Preferences", {
-  web: () => __vitePreload(() => import("./web.4d929aef.js"), true ? [] : void 0).then((m) => new m.PreferencesWeb())
+  web: () => __vitePreload(() => import("./web.9ecf5f40.js"), true ? [] : void 0).then((m) => new m.PreferencesWeb())
 });
 async function storage_setItem(key, value) {
   await Preferences.set({
@@ -3196,10 +3196,10 @@ var Encoding;
   Encoding2["UTF16"] = "utf16";
 })(Encoding || (Encoding = {}));
 registerPlugin("Filesystem", {
-  web: () => __vitePreload(() => import("./web.a9d3b48d.js"), true ? [] : void 0).then((m) => new m.FilesystemWeb())
+  web: () => __vitePreload(() => import("./web.84c8d751.js"), true ? [] : void 0).then((m) => new m.FilesystemWeb())
 });
 const App = registerPlugin("App", {
-  web: () => __vitePreload(() => import("./web.540bf302.js"), true ? [] : void 0).then((m) => new m.AppWeb())
+  web: () => __vitePreload(() => import("./web.06c1b081.js"), true ? [] : void 0).then((m) => new m.AppWeb())
 });
 const custom$1 = {
   BarAlertRange: {
@@ -3627,7 +3627,7 @@ function getRandomLightColor() {
   } while (r * 0.299 + g * 0.587 + b * 0.114 < 186);
   return `#${((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1).toUpperCase()}`;
 }
-function getCurrentFormattedDateTime() {
+function getCurrentFormattedDateTime(formatType = "") {
   const now = new Date();
   const year = now.getFullYear();
   const month = String(now.getMonth() + 1).padStart(2, "0");
@@ -3635,7 +3635,10 @@ function getCurrentFormattedDateTime() {
   const hours = String(now.getHours()).padStart(2, "0");
   const minutes = String(now.getMinutes()).padStart(2, "0");
   const seconds = String(now.getSeconds()).padStart(2, "0");
-  return `${year}/${month}/${day} ${hours}:${minutes}:${seconds}`;
+  if (formatType == "yyyy/dd")
+    return `${year}/${month}`;
+  else
+    return `${year}/${month}/${day} ${hours}:${minutes}:${seconds}`;
 }
 function getDayOfWeekToCalendar(d) {
   const date = new Date(d);
@@ -5910,6 +5913,7 @@ _extends(Remove, {
 Sortable.mount(new AutoScrollPlugin());
 let sortableInstance;
 async function initDataContent(DataValue2, UserSettingValue2) {
+  UserSettingValue2.CurrentDateKey = getCurrentFormattedDateTime("yyyy/dd");
   renderCarouselData(UserSettingValue2.CurrentDateKey);
   renderDataContent(DataValue2, UserSettingValue2);
   renderUserSettingContent(UserSettingValue2);
@@ -7952,7 +7956,7 @@ var loadModule = (cmpMeta, hostRef, hmrVersionId) => {
       case "jeep-sqlite":
         return __vitePreload(() => import(
           /* webpackMode: "lazy" */
-          "./jeep-sqlite.entry.02a03b0f.js"
+          "./jeep-sqlite.entry.be1d9780.js"
         ), true ? [] : void 0).then(processMod, consoleError);
     }
   }
@@ -9002,7 +9006,7 @@ const defineCustomElements = async (win2, options) => {
   }
 })();
 registerPlugin("CapacitorSQLite", {
-  web: () => __vitePreload(() => import("./web.ea38db73.js"), true ? [] : void 0).then((m) => new m.CapacitorSQLiteWeb()),
+  web: () => __vitePreload(() => import("./web.a1662043.js"), true ? [] : void 0).then((m) => new m.CapacitorSQLiteWeb()),
   electron: () => window.CapacitorCustomPlatform.plugins.CapacitorSQLite
 });
 defineCustomElements();
