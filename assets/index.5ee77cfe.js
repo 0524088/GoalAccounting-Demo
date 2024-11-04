@@ -576,7 +576,7 @@ registerPlugin("CapacitorHttp", {
   web: () => new CapacitorHttpPluginWeb()
 });
 const Preferences = registerPlugin("Preferences", {
-  web: () => __vitePreload(() => import("./web.6e9e1744.js"), true ? [] : void 0).then((m) => new m.PreferencesWeb())
+  web: () => __vitePreload(() => import("./web.4d929aef.js"), true ? [] : void 0).then((m) => new m.PreferencesWeb())
 });
 async function storage_setItem(key, value) {
   await Preferences.set({
@@ -3196,10 +3196,10 @@ var Encoding;
   Encoding2["UTF16"] = "utf16";
 })(Encoding || (Encoding = {}));
 registerPlugin("Filesystem", {
-  web: () => __vitePreload(() => import("./web.ef45658f.js"), true ? [] : void 0).then((m) => new m.FilesystemWeb())
+  web: () => __vitePreload(() => import("./web.a9d3b48d.js"), true ? [] : void 0).then((m) => new m.FilesystemWeb())
 });
 const App = registerPlugin("App", {
-  web: () => __vitePreload(() => import("./web.6d8ae252.js"), true ? [] : void 0).then((m) => new m.AppWeb())
+  web: () => __vitePreload(() => import("./web.540bf302.js"), true ? [] : void 0).then((m) => new m.AppWeb())
 });
 const custom$1 = {
   BarAlertRange: {
@@ -5910,8 +5910,6 @@ _extends(Remove, {
 Sortable.mount(new AutoScrollPlugin());
 let sortableInstance;
 async function initDataContent(DataValue2, UserSettingValue2) {
-  const keyArray = Object.keys(DataValue2);
-  UserSettingValue2.CurrentDateKey = keyArray[keyArray.length - 1];
   renderCarouselData(UserSettingValue2.CurrentDateKey);
   renderDataContent(DataValue2, UserSettingValue2);
   renderUserSettingContent(UserSettingValue2);
@@ -7954,7 +7952,7 @@ var loadModule = (cmpMeta, hostRef, hmrVersionId) => {
       case "jeep-sqlite":
         return __vitePreload(() => import(
           /* webpackMode: "lazy" */
-          "./jeep-sqlite.entry.69914b64.js"
+          "./jeep-sqlite.entry.02a03b0f.js"
         ), true ? [] : void 0).then(processMod, consoleError);
     }
   }
@@ -9004,7 +9002,7 @@ const defineCustomElements = async (win2, options) => {
   }
 })();
 registerPlugin("CapacitorSQLite", {
-  web: () => __vitePreload(() => import("./web.0a8252aa.js"), true ? [] : void 0).then((m) => new m.CapacitorSQLiteWeb()),
+  web: () => __vitePreload(() => import("./web.ea38db73.js"), true ? [] : void 0).then((m) => new m.CapacitorSQLiteWeb()),
   electron: () => window.CapacitorCustomPlatform.plugins.CapacitorSQLite
 });
 defineCustomElements();
