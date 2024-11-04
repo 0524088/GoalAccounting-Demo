@@ -576,7 +576,7 @@ registerPlugin("CapacitorHttp", {
   web: () => new CapacitorHttpPluginWeb()
 });
 const Preferences = registerPlugin("Preferences", {
-  web: () => __vitePreload(() => import("./web.9ecf5f40.js"), true ? [] : void 0).then((m) => new m.PreferencesWeb())
+  web: () => __vitePreload(() => import("./web.87fb0c21.js"), true ? [] : void 0).then((m) => new m.PreferencesWeb())
 });
 async function storage_setItem(key, value) {
   await Preferences.set({
@@ -587,9 +587,6 @@ async function storage_setItem(key, value) {
 async function storage_getItem(key) {
   const ret = await Preferences.get({ key });
   return typeof JSON.parse(ret.value) == "object" ? JSON.parse(ret.value) : ret.value;
-}
-async function storage_remove(key) {
-  await Preferences.remove({ key });
 }
 async function storage_clear() {
   await Preferences.clear();
@@ -3196,10 +3193,10 @@ var Encoding;
   Encoding2["UTF16"] = "utf16";
 })(Encoding || (Encoding = {}));
 registerPlugin("Filesystem", {
-  web: () => __vitePreload(() => import("./web.84c8d751.js"), true ? [] : void 0).then((m) => new m.FilesystemWeb())
+  web: () => __vitePreload(() => import("./web.5cbc8869.js"), true ? [] : void 0).then((m) => new m.FilesystemWeb())
 });
 const App = registerPlugin("App", {
-  web: () => __vitePreload(() => import("./web.06c1b081.js"), true ? [] : void 0).then((m) => new m.AppWeb())
+  web: () => __vitePreload(() => import("./web.1a8c720f.js"), true ? [] : void 0).then((m) => new m.AppWeb())
 });
 const custom$1 = {
   BarAlertRange: {
@@ -3656,12 +3653,6 @@ function getOffsetMonth(dateString, offset) {
 }
 async function initData() {
   let Data2 = {};
-  let UserSetting2 = await initUserSetting();
-  let UserSettingValue2 = await UserSetting2.get();
-  if (UserSettingValue2.DebugMode == true) {
-    await storage_remove("Data");
-    await storage_setItem("Data", demo_Data);
-  }
   Data2.set = async (data) => {
     await storage_setItem("Data", data);
     return await storage_getItem("Data");
@@ -3682,7 +3673,17 @@ async function initData() {
     return data;
   };
   Data2.getDefault = getDefault;
+  Data2.demo = demo;
   return Data2;
+}
+async function demo() {
+  let UserSetting2 = await initUserSetting();
+  let UserSettingValue2 = await UserSetting2.get();
+  if (UserSettingValue2.DebugMode == true) {
+    let data = await storage_getItem("Data");
+    Object.assign(data, demo_Data);
+    await storage_setItem("Data", data);
+  }
 }
 function getDefault(formattedDate = null) {
   let today = new Date();
@@ -5913,7 +5914,6 @@ _extends(Remove, {
 Sortable.mount(new AutoScrollPlugin());
 let sortableInstance;
 async function initDataContent(DataValue2, UserSettingValue2) {
-  UserSettingValue2.CurrentDateKey = getCurrentFormattedDateTime("yyyy/dd");
   renderCarouselData(UserSettingValue2.CurrentDateKey);
   renderDataContent(DataValue2, UserSettingValue2);
   renderUserSettingContent(UserSettingValue2);
@@ -7304,7 +7304,7 @@ async function initEventListener() {
     if (control.classList.contains("carousel-control-next")) {
       date = getOffsetMonth(UserSettingValue$1.CurrentDateKey, 1);
     }
-    if (!(date in DataValue$1)) {
+    if (!checkHasData(DataValue$1, date)) {
       DataValue$1[date] = Data$1.getDefault(date)[date];
       await Data$1.set(DataValue$1);
     }
@@ -7907,6 +7907,12 @@ async function updateDataItemsSort(newOrder) {
 function getAccountings() {
   return UserSettingValue$1.CurrentAccountings;
 }
+function checkHasData(DataValue2, date) {
+  if (!(date in DataValue2)) {
+    return false;
+  }
+  return true;
+}
 const NAMESPACE = "jeep-sqlite";
 const BUILD = { allRenderFn: true, appendChildSlotFix: false, asyncLoading: true, asyncQueue: false, attachStyles: true, cloneNodeFix: false, cmpDidLoad: true, cmpDidRender: false, cmpDidUnload: false, cmpDidUpdate: false, cmpShouldUpdate: false, cmpWillLoad: true, cmpWillRender: false, cmpWillUpdate: false, connectedCallback: true, constructableCSS: true, cssAnnotations: true, devTools: false, disconnectedCallback: false, element: false, event: true, experimentalScopedSlotChanges: false, experimentalSlotFixes: false, formAssociated: false, hasRenderFn: true, hostListener: false, hostListenerTarget: false, hostListenerTargetBody: false, hostListenerTargetDocument: false, hostListenerTargetParent: false, hostListenerTargetWindow: false, hotModuleReplacement: false, hydrateClientSide: false, hydrateServerSide: false, hydratedAttribute: false, hydratedClass: true, hydratedSelectorName: "hydrated", initializeNextTick: false, invisiblePrehydration: true, isDebug: false, isDev: false, isTesting: false, lazyLoad: true, lifecycle: true, lifecycleDOMEvents: false, member: true, method: true, mode: false, observeAttribute: true, profile: false, prop: true, propBoolean: true, propMutable: false, propNumber: false, propString: true, reflect: true, scoped: false, scopedSlotTextContentFix: false, scriptDataOpts: false, shadowDelegatesFocus: false, shadowDom: true, slot: false, slotChildNodesFix: false, slotRelocation: false, state: true, style: true, svg: false, taskQueue: true, transformTagName: false, updatable: true, vdomAttribute: true, vdomClass: false, vdomFunctional: false, vdomKey: false, vdomListener: false, vdomPropOrAttr: true, vdomRef: false, vdomRender: false, vdomStyle: false, vdomText: false, vdomXlink: false, watchCallback: true };
 var __defProp2 = Object.defineProperty;
@@ -7956,7 +7962,7 @@ var loadModule = (cmpMeta, hostRef, hmrVersionId) => {
       case "jeep-sqlite":
         return __vitePreload(() => import(
           /* webpackMode: "lazy" */
-          "./jeep-sqlite.entry.be1d9780.js"
+          "./jeep-sqlite.entry.5c31fd40.js"
         ), true ? [] : void 0).then(processMod, consoleError);
     }
   }
@@ -9006,7 +9012,7 @@ const defineCustomElements = async (win2, options) => {
   }
 })();
 registerPlugin("CapacitorSQLite", {
-  web: () => __vitePreload(() => import("./web.a1662043.js"), true ? [] : void 0).then((m) => new m.CapacitorSQLiteWeb()),
+  web: () => __vitePreload(() => import("./web.ba2b6539.js"), true ? [] : void 0).then((m) => new m.CapacitorSQLiteWeb()),
   electron: () => window.CapacitorCustomPlatform.plugins.CapacitorSQLite
 });
 defineCustomElements();
@@ -9016,9 +9022,18 @@ window.addEventListener("DOMContentLoaded", async () => {
   UserSetting = await initUserSetting();
   UserSettingValue = await UserSetting.get();
   UserSettingValue.CurrentAccounting = "\u7E3D\u89BD";
+  UserSettingValue.CurrentDateKey = getCurrentFormattedDateTime("yyyy/dd");
   await UserSetting.set(UserSettingValue);
   Data = await initData();
   DataValue = await Data.get();
+  let date = UserSettingValue.CurrentDateKey;
+  if (!checkHasData(DataValue, date)) {
+    DataValue[date] = Data.getDefault(date)[date];
+    DataValue = await Data.set(DataValue);
+  }
+  if (UserSettingValue.DebugMode == true) {
+    await Data.demo();
+  }
   await initDataContent(DataValue, UserSettingValue);
   await initEventListener();
   LocateHomePage();
