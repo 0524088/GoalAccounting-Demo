@@ -33,7 +33,7 @@
 ![image](https://github.com/user-attachments/assets/25545144-47fa-4362-a0c8-b52092a8fd89)
 
 ## Using By Web
-https://0524088.github.io/AccountingWebApp-Demo/
+[https://0524088.github.io/AccountingWebApp-Demo/](https://0524088.github.io/GoalAccounting-Demo/)
 
 ## Using By Android Apk
 下載並在 Android 裝置上安裝 "goal_accounting.apk"
