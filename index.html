@@ -20,13 +20,13 @@
         
         
         
-      <script type="module" crossorigin src="./assets/index.5370971f.js"></script>
+      <script type="module" crossorigin src="./assets/index.e93a150f.js"></script>
       <link rel="stylesheet" href="./assets/index.b4fd8a32.css">
     </head>
 
     <body>
         <!-- 版本號 -->
-        <div class="version-label">Version 0.7.0</div>
+        <div class="version-label">Version <span id="app-version">0.0.0</span></div>
         
         <!-- app 啟動時的 loading 頁 -->
         <div id="app-loading">
@@ -204,15 +204,15 @@
                                         <i class="fs-3 bi bi-x-lg" data-bs-dismiss="modal" aria-label="Close"></i>
                                     </div>
                                     <div class="modal-body">
-                                        <select class="form-select goal-options mb-1" name="goal-options">
+                                        <select class="form-select goal-options mb-1" name="goal-options" data-old="">
                                             <option selected>請先輸入目標</option>
                                         </select>
                                         <form>
-                                            <input type="date" class="form-control mb-1" name="input-date" placeholder="輸入日期" required />
-                                            <input type="text" class="form-control mb-1" name="input-name" placeholder="輸入記帳名稱" required />
-                                            <input type="number" class="form-control mb-1" name="input-target-money" min="0" oninput="validity.valid||(value='');" placeholder="輸入花費目標金額" required />
+                                            <input type="date" class="form-control mb-1" name="input-date" placeholder="輸入日期" required data-old="" />
+                                            <input type="text" class="form-control mb-1" name="input-name" placeholder="輸入記帳名稱" required data-old="" />
+                                            <input type="number" class="form-control mb-1" name="input-amount-money" min="0" oninput="validity.valid||(value='');" placeholder="輸入花費目標金額" required data-old />
                                         </form>
-                                        <input type="number" class="form-control mb-1" name="input-bonus-money" min="0" oninput="validity.valid||(value='');" placeholder="輸入花費額外金額(非必填)" />
+                                        <input type="number" class="form-control mb-1" name="input-bonus-money" min="0" oninput="validity.valid||(value='');" placeholder="輸入花費額外金額(非必填)" data-old />
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-danger modify d-none" data-action="delete">刪除</button>

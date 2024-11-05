@@ -576,8 +576,16 @@ registerPlugin("CapacitorHttp", {
   web: () => new CapacitorHttpPluginWeb()
 });
 const Preferences = registerPlugin("Preferences", {
-  web: () => __vitePreload(() => import("./web.87fb0c21.js"), true ? [] : void 0).then((m) => new m.PreferencesWeb())
+  web: () => __vitePreload(() => import("./web.8990ae00.js"), true ? [] : void 0).then((m) => new m.PreferencesWeb())
 });
+const APP_NAME = "\u9918\u984D\u5F0F\u8A18\u5E33APP";
+const APP_VERSION = "0.8.0";
+const DEBUG_MODE = false;
+var CONFIG = {
+  APP_NAME,
+  APP_VERSION,
+  DEBUG_MODE
+};
 async function storage_setItem(key, value) {
   await Preferences.set({
     key,
@@ -3193,10 +3201,10 @@ var Encoding;
   Encoding2["UTF16"] = "utf16";
 })(Encoding || (Encoding = {}));
 registerPlugin("Filesystem", {
-  web: () => __vitePreload(() => import("./web.5cbc8869.js"), true ? [] : void 0).then((m) => new m.FilesystemWeb())
+  web: () => __vitePreload(() => import("./web.821bd6aa.js"), true ? [] : void 0).then((m) => new m.FilesystemWeb())
 });
 const App = registerPlugin("App", {
-  web: () => __vitePreload(() => import("./web.1a8c720f.js"), true ? [] : void 0).then((m) => new m.AppWeb())
+  web: () => __vitePreload(() => import("./web.e7b55657.js"), true ? [] : void 0).then((m) => new m.AppWeb())
 });
 const custom$1 = {
   BarAlertRange: {
@@ -3223,6 +3231,7 @@ const Pickr$1 = {
     "#0000FF"
   ]
 };
+const AppVersion = "0.8.0";
 var defaultSetting = {
   custom: custom$1,
   HomeLocation,
@@ -3233,7 +3242,8 @@ var defaultSetting = {
   NewItemPosition,
   ShowType,
   DebugMode,
-  Pickr: Pickr$1
+  Pickr: Pickr$1,
+  AppVersion
 };
 async function initUserSetting() {
   let userSetting = {};
@@ -3243,11 +3253,17 @@ async function initUserSetting() {
   };
   userSetting.get = async () => {
     var _a;
-    return (_a = await storage_getItem("UserSetting")) != null ? _a : await userSetting.set(defaultSetting);
+    return (_a = await storage_getItem("UserSetting")) != null ? _a : await setDefaultSetting();
   };
   return userSetting;
 }
-var demo_Data = {
+async function setDefaultSetting() {
+  defaultSetting.AppVersion = CONFIG.APP_VERSION;
+  await storage_setItem("UserSetting", defaultSetting);
+  console.log(defaultSetting);
+  return await storage_getItem("UserSetting");
+}
+var demo_data$1 = {
   "2024/06": {
     currentId: 9,
     totalGoal: {
@@ -3261,162 +3277,68 @@ var demo_Data = {
         bonus: 30
       }
     },
-    items: {
-      unset: {
+    items: [
+      {
         name: "\u5176\u4ED6\u82B1\u8CBB",
         current: {
           amount: 400,
           bonus: 100
         },
-        accounting: [
-          {
-            id: 8,
-            name: "\u5176\u4ED6\u82B1\u8CBB1",
-            amount: 300,
-            bonus: 100,
-            date: "2024/07/19",
-            created_at: "2024/07/22 00:00:00",
-            unset: true
-          },
-          {
-            id: 9,
-            name: "\u5176\u4ED6\u82B1\u8CBB2",
-            amount: 100,
-            bonus: 0,
-            date: "2024/07/22",
-            created_at: "2024/07/22 00:00:00",
-            unset: true
-          }
-        ],
         unset: true
       },
-      normal: [
-        {
-          name: "\u6E2C\u8A66\u76EE\u6A191",
-          goal: {
-            amount: 500,
-            bonus: 0
-          },
-          current: {
-            amount: 700,
-            bonus: 10
-          },
-          accounting: [
-            {
-              id: 0,
-              name: "\u6E2C\u8A66\u8A18\u5E331-1",
-              amount: 100,
-              bonus: 0,
-              date: "2024/07/22",
-              created_at: "2024/07/22 00:00:00"
-            },
-            {
-              id: 1,
-              name: "\u6E2C\u8A66\u8A18\u5E331-2",
-              amount: 500,
-              bonus: 10,
-              date: "2024/07/22",
-              created_at: "2024/07/22 01:00:00"
-            },
-            {
-              id: 2,
-              name: "\u6E2C\u8A66\u8A18\u5E331-3",
-              amount: 100,
-              bonus: 0,
-              date: "2024/07/10",
-              created_at: "2024/07/22 02:00:00"
-            }
-          ],
-          color: "#FFDC35",
-          created_at: "2024/07/19 00:00:00"
+      {
+        name: "\u6E2C\u8A66\u76EE\u6A191",
+        goal: {
+          amount: 500,
+          bonus: 0
         },
-        {
-          name: "\u6E2C\u8A66\u76EE\u6A192",
-          goal: {
-            amount: 500,
-            bonus: 500
-          },
-          current: {
-            amount: 800,
-            bonus: 10
-          },
-          accounting: [
-            {
-              id: 3,
-              name: "\u6E2C\u8A66\u8A18\u5E332-1",
-              amount: 650,
-              bonus: 5,
-              date: "2024/07/24",
-              created_at: "2024/07/24 00:00:00"
-            },
-            {
-              id: 4,
-              name: "\u6E2C\u8A66\u8A18\u5E332-2",
-              amount: 150,
-              bonus: 5,
-              date: "2024/07/25",
-              created_at: "2024/07/24 01:00:00"
-            }
-          ],
-          color: "#FFBD9D",
-          created_at: "2024/07/23 00:00:00"
+        current: {
+          amount: 700,
+          bonus: 10
         },
-        {
-          name: "\u6E2C\u8A66\u76EE\u6A193",
-          goal: {
-            amount: 500,
-            bonus: 500
-          },
-          current: {
-            amount: 900,
-            bonus: 10
-          },
-          accounting: [
-            {
-              id: 5,
-              name: "\u6E2C\u8A66\u8A18\u5E333-1",
-              amount: 900,
-              bonus: 10,
-              date: "2024/07/22",
-              created_at: "2024/07/23 00:00:00"
-            }
-          ],
-          color: "#FFFFAA",
-          created_at: "2024/07/21 01:00:00"
+        color: "#FFDC35",
+        created_at: "2024/07/19 00:00:00"
+      },
+      {
+        name: "\u6E2C\u8A66\u76EE\u6A192",
+        goal: {
+          amount: 500,
+          bonus: 500
         },
-        {
-          name: "\u6E2C\u8A66\u76EE\u6A194",
-          goal: {
-            amount: 2e3,
-            bonus: 100
-          },
-          current: {
-            amount: 1e3,
-            bonus: 0
-          },
-          accounting: [
-            {
-              id: 6,
-              name: "\u6E2C\u8A66\u8A18\u5E334-1",
-              amount: 500,
-              bonus: 0,
-              date: "2024/07/20",
-              created_at: "2024/07/23 00:00:00"
-            },
-            {
-              id: 7,
-              name: "\u6E2C\u8A66\u8A18\u5E334-2",
-              amount: 500,
-              bonus: 0,
-              date: "2024/07/10",
-              created_at: "2024/07/23 00:00:00"
-            }
-          ],
-          color: "#A8FF24",
-          created_at: "2024/07/23 00:10:00"
-        }
-      ]
-    }
+        current: {
+          amount: 800,
+          bonus: 10
+        },
+        color: "#FFBD9D",
+        created_at: "2024/07/23 00:00:00"
+      },
+      {
+        name: "\u6E2C\u8A66\u76EE\u6A193",
+        goal: {
+          amount: 500,
+          bonus: 500
+        },
+        current: {
+          amount: 900,
+          bonus: 10
+        },
+        color: "#FFFFAA",
+        created_at: "2024/07/21 01:00:00"
+      },
+      {
+        name: "\u6E2C\u8A66\u76EE\u6A194",
+        goal: {
+          amount: 2e3,
+          bonus: 100
+        },
+        current: {
+          amount: 1e3,
+          bonus: 0
+        },
+        color: "#A8FF24",
+        created_at: "2024/07/23 00:10:00"
+      }
+    ]
   },
   "2024/07": {
     currentId: 0,
@@ -3426,187 +3348,133 @@ var demo_Data = {
         bonus: 50020
       }
     },
-    items: {
-      unset: {
+    items: [
+      {
         name: "\u5176\u4ED6\u82B1\u8CBB",
         current: {
           amount: 9999,
           bonus: 0
         },
-        accounting: [],
         unset: true
       },
-      normal: [
-        {
-          name: "\u540D\u5B57\u8D85\u9577\u7684\u6E2C\u8A666666666666666666666666666666666\u540D\u5B57\u8D85\u9577\u7684\u6E2C\u8A66GOGOGOGOGGGGGGGGGGGGGGGGGGGGGGGGGG",
-          goal: {
-            amount: 9250,
-            bonus: 0
-          },
-          current: {
-            amount: 9250,
-            bonus: 0
-          },
-          accounting: [],
-          color: "#A8FF24",
-          created_at: "2024/07/23 00:00:00"
+      {
+        name: "\u540D\u5B57\u8D85\u9577\u7684\u6E2C\u8A666666666666666666666666666666666\u540D\u5B57\u8D85\u9577\u7684\u6E2C\u8A66GOGOGOGOGGGGGGGGGGGGGGGGGGGGGGGGGG",
+        goal: {
+          amount: 9250,
+          bonus: 0
         },
-        {
-          name: "\u79DF\u91D1",
-          goal: {
-            amount: 9250,
-            bonus: 0
-          },
-          current: {
-            amount: 9250,
-            bonus: 0
-          },
-          accounting: [],
-          color: "#84C1FF",
-          created_at: "2024/07/23 01:00:00"
+        current: {
+          amount: 9250,
+          bonus: 0
         },
-        {
-          name: "\u96FB\u4FE1",
-          goal: {
-            amount: 799,
-            bonus: 0
-          },
-          current: {
-            amount: 799,
-            bonus: 0
-          },
-          accounting: [],
-          color: "#7AFEC6",
-          created_at: "2024/07/23 00:10:00"
+        color: "#A8FF24",
+        created_at: "2024/07/23 00:00:00"
+      },
+      {
+        name: "\u79DF\u91D1",
+        goal: {
+          amount: 9250,
+          bonus: 0
         },
-        {
-          name: "\u6C34\u96FB",
-          goal: {
-            amount: 200,
-            bonus: 100
-          },
-          current: {
-            amount: 0,
-            bonus: 20
-          },
-          accounting: [],
-          color: "#A23400",
-          created_at: "2024/07/23 02:00:00"
+        current: {
+          amount: 9250,
+          bonus: 0
         },
-        {
-          name: "\u7DB2\u8DEF",
-          goal: {
-            amount: 200,
-            bonus: 100
-          },
-          current: {
-            amount: 500,
-            bonus: 0
-          },
-          accounting: [],
-          color: "#D9B3B3",
-          created_at: "2024/07/23 01:00:00"
+        color: "#84C1FF",
+        created_at: "2024/07/23 01:00:00"
+      },
+      {
+        name: "\u96FB\u4FE1",
+        goal: {
+          amount: 799,
+          bonus: 0
         },
-        {
-          name: "\u5B78\u8CB8",
-          goal: {
-            amount: 0,
-            bonus: 0
-          },
-          current: {
-            amount: 100,
-            bonus: 0
-          },
-          accounting: [],
-          color: "#A3D1D1",
-          created_at: "2024/07/23 00:00:11"
+        current: {
+          amount: 799,
+          bonus: 0
         },
-        {
-          name: "\u9910\u8CBB",
-          goal: {
-            amount: 7500,
-            bonus: 2500
-          },
-          current: {
-            amount: 1e3,
-            bonus: 5e4
-          },
-          accounting: [],
-          color: "#B766AD",
-          created_at: "2024/07/23 02:00:00"
+        color: "#7AFEC6",
+        created_at: "2024/07/23 00:10:00"
+      },
+      {
+        name: "\u6C34\u96FB",
+        goal: {
+          amount: 200,
+          bonus: 100
         },
-        {
-          name: "\u5132\u84C4\u96AA",
-          goal: {
-            amount: 0,
-            bonus: 0
-          },
-          current: {
-            amount: 0,
-            bonus: 0
-          },
-          accounting: [],
-          color: "#0066CC",
-          created_at: "2024/07/23 03:00:00"
+        current: {
+          amount: 0,
+          bonus: 20
         },
-        {
-          name: "\u5A1B\u6A02",
-          goal: {
-            amount: 4e3,
-            bonus: 0
-          },
-          current: {
-            amount: 4e3,
-            bonus: 0
-          },
-          accounting: [],
-          color: "#F1E1FF",
-          created_at: "2024/07/23 00:00:00"
+        color: "#A23400",
+        created_at: "2024/07/23 02:00:00"
+      },
+      {
+        name: "\u7DB2\u8DEF",
+        goal: {
+          amount: 200,
+          bonus: 100
         },
-        {
-          name: "\u4FDD\u96AA",
-          goal: {
-            amount: 1016,
-            bonus: 0
-          },
-          current: {
-            amount: 1016,
-            bonus: 0
-          },
-          accounting: [],
-          color: "#930093",
-          created_at: "2024/07/23 00:00:00"
+        current: {
+          amount: 500,
+          bonus: 0
         },
-        {
-          name: "\u9810\u5099\u91D1/\u5132\u84C4",
-          goal: {
-            amount: 4e3,
-            bonus: 0
-          },
-          current: {
-            amount: 4e3,
-            bonus: 0
-          },
-          accounting: [],
-          color: "#FF0000",
-          created_at: "2024/07/23 00:00:01"
+        color: "#D9B3B3",
+        created_at: "2024/07/23 01:00:00"
+      },
+      {
+        name: "\u5B78\u8CB8",
+        goal: {
+          amount: 0,
+          bonus: 0
         },
-        {
-          name: "\u5B5D\u89AA\u8CBB",
-          goal: {
-            amount: 2e3,
-            bonus: 0
-          },
-          current: {
-            amount: 2e3,
-            bonus: 0
-          },
-          accounting: [],
-          color: "#5B5B5B",
-          created_at: "2024/07/23 00:00:01"
-        }
-      ]
-    }
+        current: {
+          amount: 100,
+          bonus: 0
+        },
+        color: "#A3D1D1",
+        created_at: "2024/07/23 00:00:11"
+      },
+      {
+        name: "\u9910\u8CBB",
+        goal: {
+          amount: 7500,
+          bonus: 2500
+        },
+        current: {
+          amount: 1e3,
+          bonus: 5e4
+        },
+        color: "#B766AD",
+        created_at: "2024/07/23 02:00:00"
+      },
+      {
+        name: "\u5A1B\u6A02",
+        goal: {
+          amount: 4e3,
+          bonus: 0
+        },
+        current: {
+          amount: 4e3,
+          bonus: 0
+        },
+        color: "#F1E1FF",
+        created_at: "2024/07/23 00:00:00"
+      },
+      {
+        name: "\u4FDD\u96AA",
+        goal: {
+          amount: 1016,
+          bonus: 0
+        },
+        current: {
+          amount: 1016,
+          bonus: 0
+        },
+        color: "#930093",
+        created_at: "2024/07/23 00:00:00"
+      }
+    ]
   }
 };
 function number2percent(number) {
@@ -3659,7 +3527,7 @@ async function initData() {
   };
   Data2.get = async () => {
     var _a;
-    return (_a = await storage_getItem("Data")) != null ? _a : await Data2.set(getDefault());
+    return (_a = await storage_getItem("Data")) != null ? _a : await Data2.set(getDefault$1());
   };
   Data2.remove = async (date, nameArray = []) => {
     let data = await storage_getItem("Data");
@@ -3672,20 +3540,18 @@ async function initData() {
     await storage_setItem("Data", data);
     return data;
   };
-  Data2.getDefault = getDefault;
-  Data2.demo = demo;
+  Data2.getDefault = getDefault$1;
+  Data2.demo = async () => {
+    return await demo$1();
+  };
   return Data2;
 }
-async function demo() {
-  let UserSetting2 = await initUserSetting();
-  let UserSettingValue2 = await UserSetting2.get();
-  if (UserSettingValue2.DebugMode == true) {
-    let data = await storage_getItem("Data");
-    Object.assign(data, demo_Data);
-    await storage_setItem("Data", data);
-  }
+async function demo$1() {
+  let data = await storage_getItem("Data");
+  Object.assign(data, demo_data$1);
+  await storage_setItem("Data", data);
 }
-function getDefault(formattedDate = null) {
+function getDefault$1(formattedDate = null) {
   let today = new Date();
   let year = today.getFullYear();
   let month = today.getMonth() + 1;
@@ -3700,18 +3566,155 @@ function getDefault(formattedDate = null) {
           bonus: 0
         }
       },
-      items: {
-        unset: {
+      items: [
+        {
           name: "\u5176\u4ED6\u82B1\u8CBB",
           current: {
             amount: 0,
             bonus: 0
           },
-          accounting: [],
           unset: true
-        },
-        normal: []
+        }
+      ]
+    }
+  };
+}
+var demo_data = {
+  "2024/06": {
+    "\u5176\u4ED6\u82B1\u8CBB": [
+      {
+        id: 8,
+        name: "\u5176\u4ED6\u82B1\u8CBB1",
+        amount: 300,
+        bonus: 100,
+        date: "2024/07/19",
+        created_at: "2024/07/22 00:00:00"
+      },
+      {
+        id: 9,
+        name: "\u5176\u4ED6\u82B1\u8CBB2",
+        amount: 100,
+        bonus: 0,
+        date: "2024/07/22",
+        created_at: "2024/07/22 00:00:00"
       }
+    ],
+    "\u6E2C\u8A66\u76EE\u6A191": [
+      {
+        id: 0,
+        name: "\u6E2C\u8A66\u8A18\u5E331-1",
+        amount: 100,
+        bonus: 0,
+        date: "2024/07/22",
+        created_at: "2024/07/22 00:00:00"
+      },
+      {
+        id: 1,
+        name: "\u6E2C\u8A66\u8A18\u5E331-2",
+        amount: 500,
+        bonus: 10,
+        date: "2024/07/22",
+        created_at: "2024/07/22 01:00:00"
+      },
+      {
+        id: 2,
+        name: "\u6E2C\u8A66\u8A18\u5E331-3",
+        amount: 100,
+        bonus: 0,
+        date: "2024/07/10",
+        created_at: "2024/07/22 02:00:00"
+      }
+    ],
+    "\u6E2C\u8A66\u76EE\u6A192": [
+      {
+        id: 3,
+        name: "\u6E2C\u8A66\u8A18\u5E332-1",
+        amount: 650,
+        bonus: 5,
+        date: "2024/07/24",
+        created_at: "2024/07/24 00:00:00"
+      },
+      {
+        id: 4,
+        name: "\u6E2C\u8A66\u8A18\u5E332-2",
+        amount: 150,
+        bonus: 5,
+        date: "2024/07/25",
+        created_at: "2024/07/24 01:00:00"
+      }
+    ],
+    "\u6E2C\u8A66\u76EE\u6A193": [
+      {
+        id: 5,
+        name: "\u6E2C\u8A66\u8A18\u5E333-1",
+        amount: 900,
+        bonus: 10,
+        date: "2024/07/22",
+        created_at: "2024/07/23 00:00:00"
+      }
+    ],
+    "\u6E2C\u8A66\u76EE\u6A194": [
+      {
+        id: 6,
+        name: "\u6E2C\u8A66\u8A18\u5E334-1",
+        amount: 500,
+        bonus: 0,
+        date: "2024/07/20",
+        created_at: "2024/07/23 00:00:00"
+      },
+      {
+        id: 7,
+        name: "\u6E2C\u8A66\u8A18\u5E334-2",
+        amount: 500,
+        bonus: 0,
+        date: "2024/07/10",
+        created_at: "2024/07/23 00:00:00"
+      }
+    ]
+  },
+  "2024/07": {
+    "\u5176\u4ED6\u82B1\u8CBB": [],
+    "\u540D\u5B57\u8D85\u9577\u7684\u6E2C\u8A666666666666666666666666666666666\u540D\u5B57\u8D85\u9577\u7684\u6E2C\u8A66GOGOGOGOGGGGGGGGGGGGGGGGGGGGGGGGGG": [],
+    "\u79DF\u91D1": [],
+    "\u96FB\u4FE1": [],
+    "\u6C34\u96FB": [],
+    "\u7DB2\u8DEF": [],
+    "\u5B78\u8CB8": [],
+    "\u9910\u8CBB": [],
+    "\u5A1B\u6A02": [],
+    "\u4FDD\u96AA": []
+  }
+};
+async function initAccounting() {
+  let Accounting2 = {};
+  Accounting2.set = async (accounting) => {
+    await storage_setItem("Accounting", accounting);
+    return await storage_getItem("Accounting");
+  };
+  Accounting2.get = async () => {
+    var _a;
+    return (_a = await storage_getItem("Accounting")) != null ? _a : await Accounting2.set(getDefault());
+  };
+  Accounting2.getDefault = getDefault;
+  Accounting2.demo = async () => {
+    return await demo();
+  };
+  return Accounting2;
+}
+async function demo() {
+  let data = await storage_getItem("Accounting");
+  Object.assign(data, demo_data);
+  await storage_setItem("Accounting", data);
+}
+function getDefault(formattedDate = null) {
+  let today = new Date();
+  let year = today.getFullYear();
+  let month = today.getMonth() + 1;
+  month = month < 10 ? "0" + month : month;
+  formattedDate = formattedDate != null ? formattedDate : `${year}/${month}`;
+  return {
+    [formattedDate]: {
+      "\u5176\u4ED6\u82B1\u8CBB": []
     }
   };
 }
@@ -5913,11 +5916,15 @@ _extends(Remove, {
 });
 Sortable.mount(new AutoScrollPlugin());
 let sortableInstance;
-async function initDataContent(DataValue2, UserSettingValue2) {
+async function initDataContent(DataValue2, UserSettingValue2, AccountingValue2) {
   renderCarouselData(UserSettingValue2.CurrentDateKey);
   renderDataContent(DataValue2, UserSettingValue2);
   renderUserSettingContent(UserSettingValue2);
-  renderAccountingDetail(DataValue2[UserSettingValue2.CurrentDateKey]["items"], "\u7E3D\u89BD");
+  let goals_detail = DataValue2[UserSettingValue2.CurrentDateKey].items.reduce((acc, item) => {
+    acc[item.name] = { color: item.color };
+    return acc;
+  }, {});
+  renderAccountingDetail(goals_detail, AccountingValue2[UserSettingValue2.CurrentDateKey]);
 }
 function renderDataContent(data, { CurrentDateKey: CurrentDateKey2, ...param }) {
   const HomeContent = document.querySelector("#home-content");
@@ -5949,21 +5956,17 @@ function renderDataContent(data, { CurrentDateKey: CurrentDateKey2, ...param }) 
   debugMode(param == null ? void 0 : param.DebugMode);
 }
 function renderItemsHTML(data, mode) {
-  let items = data.items.normal;
+  let items = data.items;
   let html = "";
   let html_option = "";
-  for (let item2 of items) {
-    html += renderBarHTML(item2, {
-      mode
-    });
-    html_option += renderAccountingOptionHTML(item2.name);
-  }
-  html_option += renderAccountingOptionHTML(data.items.unset.name, true);
-  let item = data.items.unset;
-  if (item.accounting.length > 0) {
+  for (let item of items) {
+    html_option += renderAccountingOptionHTML(item.name);
+    if (item.unset && item.current.amount + item.current.bonus == 0) {
+      continue;
+    }
     html += renderBarHTML(item, {
       mode,
-      unset: true
+      unset: item == null ? void 0 : item.unset
     });
   }
   document.querySelector(".goal-options").innerHTML = html_option;
@@ -5977,15 +5980,15 @@ function renderItemsHTML(data, mode) {
 }
 function renderAccountingOption(names) {
   let html = "";
-  let is_unset = false;
+  let isUnset = false;
   for (let name of names) {
     if (name === "\u7E3D\u89BD") {
       continue;
     }
     if (name === "\u5176\u4ED6\u82B1\u8CBB") {
-      is_unset = true;
+      isUnset = true;
     }
-    html += renderAccountingOptionHTML(name, is_unset);
+    html += renderAccountingOptionHTML(name, isUnset);
   }
   document.querySelector(".goal-options").innerHTML = html;
 }
@@ -5995,10 +5998,10 @@ function renderBarHTML(item, param, isGoal) {
   const mode = param == null ? void 0 : param.mode;
   const goal = item == null ? void 0 : item.goal;
   const current = item == null ? void 0 : item.current;
-  const backgroundColor = item.color || param.unset ? "#84C1FF" : getDefaultColor();
+  const backgroundColor = item.color || (item == null ? void 0 : item.unset) ? "#84C1FF" : getDefaultColor();
   const textBackgroundColor = item.color ? item.color : "#84C1FF";
   let progressHTML = "";
-  if (isGoal || param.unset) {
+  if (isGoal || (item == null ? void 0 : item.unset)) {
     if (mode == "i-mode" && param.imode == "bonus")
       return "";
     if (!current)
@@ -6101,7 +6104,7 @@ function renderBarHTML(item, param, isGoal) {
         name = "\u76EE\u6A19\u91D1\u984D";
       }
       if (param.imode == "bonus") {
-        if (!current.bonus && !goal.bonus || !goal.bonus && item.unset === true)
+        if (!current.bonus && !goal.bonus || !goal.bonus && (item == null ? void 0 : item.unset) === true)
           return "";
         value[0] = number2percent(current.bonus / (goal.bonus || 1));
         currentNumber = convert2ThousandsSeparator(current.bonus);
@@ -6127,10 +6130,10 @@ function renderBarHTML(item, param, isGoal) {
             `;
     }
   }
-  return render2(name, mode, progressHTML, backgroundColor, isGoal);
-  function render2(name2, mode2, progressHTML2, backgroundColor2, isGoal2 = false) {
+  return render2(name, mode, progressHTML, backgroundColor, item == null ? void 0 : item.unset, isGoal);
+  function render2(name2, mode2, progressHTML2, backgroundColor2, isUnset = false, isGoal2 = false) {
     let html;
-    const check_input_html = param.unset ? "" : `<input class="form-check-input mb-auto select_item" type="checkbox">`;
+    const check_input_html = isUnset ? "" : `<input class="form-check-input mb-auto select_item" type="checkbox">`;
     const nav_html = `
             <div class="d-flex ms-auto align-items-center gap-2 mb-1 d-none nav_item">
                 ${check_input_html}
@@ -6145,9 +6148,16 @@ function renderBarHTML(item, param, isGoal) {
                 -->
             </div>
         `;
-    const icon_html = isGoal2 || mode2 == "i-mode" || param.unset ? "" : `<i class="bi bi-circle-fill" style="color: ${textBackgroundColor}; font-size: 12px"></i>`;
+    const icon_html = isGoal2 || mode2 == "i-mode" || isUnset ? "" : `<i class="bi bi-circle-fill" style="color: ${textBackgroundColor}; font-size: 12px"></i>`;
+    let class_name = "";
+    if (isGoal2)
+      class_name = "unsortable";
+    else if (isUnset)
+      class_name = "";
+    else
+      class_name = "items";
     html = `
-            <div class="${isGoal2 || param.unset ? "unsortable" : "items"} items-rounded" data-sort-name="${name2}" style="background-color: ${backgroundColor2}">
+            <div class="${class_name} items-rounded" data-sort-name="${name2}" style="background-color: ${backgroundColor2}">
                 <div class="pb-4 pt-4 mt-2 mb-2 ms-4 me-4">
                     <div class="d-flex align-items-center justify-content-start mb-2 gap-2">
                         ${icon_html}
@@ -6161,44 +6171,34 @@ function renderBarHTML(item, param, isGoal) {
     return html;
   }
 }
-function renderAccountingDetail(items, goal) {
-  let d;
-  if (!goal || goal == "\u7E3D\u89BD")
-    d = [...items.normal, items.unset];
-  else if (goal == "\u5176\u4ED6\u82B1\u8CBB")
-    d = [items.unset];
-  else
-    d = [items.normal.find((item) => item.name == goal)];
-  const allAccounting = d.flatMap(
-    (item) => item.accounting.map((accountingItem) => ({
-      ...accountingItem,
-      goalName: item.name,
-      color: item.color,
-      unset: (item == null ? void 0 : item.unset) == true ? true : false
-    }))
-  ).sort((b, a) => new Date(a.date) - new Date(b.date));
-  const AccountingDetailContent = document.querySelector("#accountingDetail-content");
-  const groupedByDate = allAccounting.reduce((acc, item) => {
+function renderAccountingDetail(goals_detail, items) {
+  for (let key in items) {
+    let itemArray = items[key];
+    items[key] = itemArray.map((item) => ({ ...item, goal_name: key }));
+  }
+  const groupedByDate = Object.values(items).flat().reduce((acc, item) => {
     const date = new Date(item.date).toLocaleDateString("zh-TW", { year: "numeric", month: "numeric", day: "numeric" });
     if (!acc[date]) {
-      acc[date] = {
-        name: item.goalName,
-        items: []
-      };
+      acc[date] = [];
     }
-    acc[date].items.push(item);
+    acc[date].push(item);
+    return acc;
+  }, {});
+  const sortedGroupedByDate = Object.keys(groupedByDate).sort((a, b) => new Date(b) - new Date(a)).reduce((acc, date) => {
+    acc[date] = groupedByDate[date];
     return acc;
   }, {});
   let html = "";
-  for (let group in groupedByDate) {
+  for (let date in sortedGroupedByDate) {
     let acc_html = "";
     let total = 0;
     let count = 0;
-    groupedByDate[group].items.forEach((accounting) => {
+    let group = sortedGroupedByDate[date];
+    group.forEach((accounting) => {
       if (count != 0) {
         acc_html += `<div class="border border-1"></div>`;
       }
-      let accountingTag_html = accounting.unset ? "" : `<span class="fw-bold rounded-pill accounting-goal" data-goal="${accounting.goalName}" style="background-color: ${accounting.color}">${accounting.goalName}</span>`;
+      let accountingTag_html = accounting.goal_name === "\u5176\u4ED6\u82B1\u8CBB" ? "" : `<span class="fw-bold rounded-pill accounting-goal" data-goal="${accounting.goal_name}" style="background-color: ${goals_detail[accounting.goal_name].color}">${accounting.goal_name}</span>`;
       acc_html += `
                 <div class="d-flex align-items-center justify-content-between accounting-item" data-id="${accounting.id}" style="height: ${accounting.bonus > 0 ? "2.8em" : "1.8em"}">
                     <div>
@@ -6217,8 +6217,8 @@ function renderAccountingDetail(items, goal) {
     html += `
             <div class="mb-2 border border-secondary border-1 rounded accounting-group">
                 <div class="form-label fw-bold d-flex align-items-center justify-content-between m-1 accounting-date"
-                    data-date="${group}">
-                    <span>${group} (${getDayOfWeekToCalendar(group)})</span>
+                    data-date="${date}">
+                    <span>${date} (${getDayOfWeekToCalendar(date)})</span>
                     <span>$ ${convert2ThousandsSeparator(total)}</span>
                 </div>
                 <div class="border-top border-secondary"></div>
@@ -6226,7 +6226,7 @@ function renderAccountingDetail(items, goal) {
             </div>
         `;
   }
-  AccountingDetailContent.innerHTML = html;
+  document.querySelector("#accountingDetail-content").innerHTML = html;
 }
 function renderCarouselData(value) {
   const CarouselInner = document.querySelector("#carouselData .carousel-inner .carousel-item.active");
@@ -6923,13 +6923,15 @@ class ColorPickr {
     this.pickr.removeSwatch(index2);
   }
 }
-let UserSetting$1, Data$1;
-let UserSettingValue$1, DataValue$1;
+let UserSetting$1, Data$1, Accounting$1;
+let UserSettingValue$1, DataValue$1, AccountingValue$1;
 async function initEventListener() {
   UserSetting$1 = await initUserSetting();
   UserSettingValue$1 = await UserSetting$1.get();
   Data$1 = await initData();
   DataValue$1 = await Data$1.get();
+  Accounting$1 = await initAccounting();
+  AccountingValue$1 = await Accounting$1.get();
   const Nav = document.querySelector("nav");
   const MenuCircleBtn = document.querySelector(".menu-circle-button");
   const SlideMenu = document.querySelector("#slideMenu");
@@ -7205,10 +7207,12 @@ async function initEventListener() {
               create_at: getCurrentFormattedDateTime()
             };
             if (UserSettingValue$1.NewItemPosition == "top")
-              DataValue$1[UserSettingValue$1.CurrentDateKey]["items"]["normal"].unshift(newItem);
+              DataValue$1[UserSettingValue$1.CurrentDateKey]["items"].unshift(newItem);
             else
-              DataValue$1[UserSettingValue$1.CurrentDateKey]["items"]["normal"].push(newItem);
+              DataValue$1[UserSettingValue$1.CurrentDateKey]["items"].push(newItem);
             await Data$1.set(DataValue$1);
+            AccountingValue$1[UserSettingValue$1.CurrentDateKey][keyName] = [];
+            await Accounting$1.set(AccountingValue$1);
             afterInsert(inputs, target.dataset.action);
             await refreshAccountings();
           }
@@ -7235,7 +7239,7 @@ async function initEventListener() {
         return false;
       }
       function checkKeyDuplicate(keyName2) {
-        const datas = DataValue$1[UserSettingValue$1.CurrentDateKey]["items"]["normal"];
+        const datas = DataValue$1[UserSettingValue$1.CurrentDateKey]["items"];
         if (datas.some((item) => item.name === keyName2) || keyName2 == "\u7E3D\u89BD" || keyName2 == "\u5176\u4ED6\u82B1\u8CBB") {
           const firstInput = InputModal.querySelector("form input[name='input-name']");
           showAlert({
@@ -7306,10 +7310,12 @@ async function initEventListener() {
     }
     if (!checkHasData(DataValue$1, date)) {
       DataValue$1[date] = Data$1.getDefault(date)[date];
+      AccountingValue$1[date] = Accounting$1.getDefault(date)[date];
       await Data$1.set(DataValue$1);
+      await Accounting$1.set(AccountingValue$1);
     }
     UserSettingValue$1.CurrentDateKey = date;
-    let accountings = DataValue$1[UserSettingValue$1.CurrentDateKey].items.normal.map((item) => item.name);
+    let accountings = DataValue$1[UserSettingValue$1.CurrentDateKey].items.map((item) => item.name);
     accountings.unshift("\u7E3D\u89BD");
     accountings.push("\u5176\u4ED6\u82B1\u8CBB");
     UserSettingValue$1.CurrentAccountingIndex = 0;
@@ -7319,7 +7325,7 @@ async function initEventListener() {
     renderDataContent(DataValue$1, UserSettingValue$1);
     renderCarouselData(UserSettingValue$1.CurrentDateKey);
     renderCarouselAccountingData(accountingTarget);
-    renderAccountingDetail(DataValue$1[UserSettingValue$1.CurrentDateKey]["items"], accountingTarget);
+    renderAccountingDetail(get_goal_detail(), build_accounting_detail_object(accountingTarget));
   });
   CarouselAccountingControl.addEventListener("click", async (e) => {
     const control = e.target.closest("button.carousel-control");
@@ -7359,7 +7365,7 @@ async function initEventListener() {
       case "rename-confirm":
         const oldText = span.textContent;
         const newText = input.textContent;
-        const datas = DataValue$1[UserSettingValue$1.CurrentDateKey]["items"]["normal"];
+        const datas = DataValue$1[UserSettingValue$1.CurrentDateKey]["items"];
         if (oldText !== newText && (datas.some((item) => item.name === newText) || newText == "\u7E3D\u89BD" || newText == "\u5176\u4ED6\u82B1\u8CBB")) {
           showAlert({
             title: "\u540D\u7A31\u91CD\u8907",
@@ -7376,7 +7382,7 @@ async function initEventListener() {
         }
         if (span.textContent != newText) {
           span.textContent = newText;
-          const item = DataValue$1[UserSettingValue$1.CurrentDateKey]["items"]["normal"].find((item2) => item2.name == oldText);
+          const item = DataValue$1[UserSettingValue$1.CurrentDateKey]["items"].find((item2) => item2.name == oldText);
           item.name = newText;
           await Data$1.set(DataValue$1);
           renderDataContent(DataValue$1, UserSettingValue$1);
@@ -7389,7 +7395,7 @@ async function initEventListener() {
           const current_accountingTarget = UserSettingValue$1.CurrentAccountings[UserSettingValue$1.CurrentAccountingIndex];
           if (current_accountingTarget === newText) {
             renderCarouselAccountingData(newText);
-            renderAccountingDetail(DataValue$1[UserSettingValue$1.CurrentDateKey]["items"], current_accountingTarget);
+            renderAccountingDetail(get_goal_detail(), build_accounting_detail_object(current_accountingTarget));
           }
         }
         break;
@@ -7404,15 +7410,17 @@ async function initEventListener() {
         GoalDetailModal_bs.hide();
         Nav.querySelector(".nav-link[data-tab-target='#accountingDetail']").click();
         triggerState("tab", { tab_id: "#home", item_name: goal });
-        if (target.dataset.action == "accounting")
+        if (target.dataset.action == "accounting") {
+          select.dataset.goal = goal;
           AccountingModal_bs.show();
+        }
         break;
     }
   });
   GoalDetailModal.addEventListener("show.bs.modal", (e) => {
     const target = e.target;
     const targetName = target.dataset.targetName;
-    const item = DataValue$1[UserSettingValue$1.CurrentDateKey]["items"]["normal"].find((item2) => item2.name == targetName);
+    const item = DataValue$1[UserSettingValue$1.CurrentDateKey]["items"].find((item2) => item2.name == targetName);
     renderGoalDetailModal(targetName, item);
   });
   GoalDetailModal.addEventListener("hide.bs.modal", (e) => {
@@ -7432,64 +7440,30 @@ async function initEventListener() {
     const target = e.target;
     if (!target.dataset.action)
       return;
-    const id = AccountingModal.dataset.id;
     const select = AccountingModal.querySelector(".goal-options");
     const goal = select.value;
-    const isUnset = select.options[select.selectedIndex].dataset.hasOwnProperty("unset") ? true : false;
-    let data;
-    if (isUnset) {
-      data = DataValue$1[UserSettingValue$1.CurrentDateKey]["items"]["unset"];
-    } else {
-      let index2 = DataValue$1[UserSettingValue$1.CurrentDateKey]["items"]["normal"].findIndex((item) => item.name === goal);
-      data = DataValue$1[UserSettingValue$1.CurrentDateKey]["items"]["normal"][index2];
-    }
     let totalGoal = DataValue$1[UserSettingValue$1.CurrentDateKey]["totalGoal"];
-    let current = data.current;
-    let accounting = data.accounting;
-    const amount = Number(AccountingModal.querySelector("[name='input-target-money']").value);
-    const bonus = Number(AccountingModal.querySelector("[name='input-bonus-money']").value);
+    const input = {
+      name: AccountingModal.querySelector("[name='input-name']"),
+      date: AccountingModal.querySelector("[name='input-date']"),
+      amount: AccountingModal.querySelector("[name='input-amount-money']"),
+      bonus: AccountingModal.querySelector("[name='input-bonus-money']")
+    };
+    const input_amount = Number(input.amount.value);
+    const input_bonus = Number(input.bonus.value);
     switch (target.dataset.action) {
       case "insert":
       case "insert-next":
-        if (!AccountingModal.querySelector("[name='input-target-money']").value || !AccountingModal.querySelector("[name='input-name']").value) {
-          AccountingModal.querySelector("form").classList.add("was-validated");
-          return;
-        }
-        accounting.push({
-          id: ++DataValue$1[UserSettingValue$1.CurrentDateKey]["currentId"],
-          name: AccountingModal.querySelector("[name='input-name']").value,
-          amount,
-          bonus,
-          date: AccountingModal.querySelector("[name='input-date']").value.replace(/-/g, "/"),
-          created_at: getCurrentFormattedDateTime(),
-          unset: isUnset
-        });
-        totalGoal.current.amount += amount;
-        totalGoal.current.bonus += bonus;
-        current.amount += amount;
-        current.bonus += bonus;
-        await Data$1.set(DataValue$1);
+        await insert_item(goal);
         if (target.dataset.action == "insert")
           AccountingModal_bs.hide();
-        AccountingModal.querySelector("[name='goal-options']").selectedIndex = 0;
-        AccountingModal.querySelector("[name='input-target-money']").value = "";
-        AccountingModal.querySelector("[name='input-bonus-money']").value = "";
+        select.selectedIndex = 0;
+        input.amount.value = "";
+        input.bonus.value = "";
         break;
       case "update":
-        let acc = accounting.find((item) => item.id === Number(id));
-        const oldTotalGoalAmount = totalGoal.current.amount;
-        const oldTotalGoalBonus = totalGoal.current.bonus;
-        const oldCurrentAmount = acc.amount;
-        const oldCurrentBonus = acc.bonus;
-        acc.name = AccountingModal.querySelector("[name='input-name']").value;
-        acc.amount = amount;
-        acc.bonus = bonus;
-        acc.date = AccountingModal.querySelector("[name='input-date']").value.replace(/-/g, "/");
-        totalGoal.current.amount += -oldTotalGoalAmount + amount;
-        totalGoal.current.bonus += -oldTotalGoalBonus + bonus;
-        current.amount += -oldCurrentAmount + amount;
-        current.bonus += -oldCurrentBonus + bonus;
-        await Data$1.set(DataValue$1);
+        await delete_item(select.dataset.old);
+        await insert_item(goal);
         AccountingModal_bs.hide();
         break;
       case "delete":
@@ -7499,23 +7473,56 @@ async function initEventListener() {
           showCancelButton: true
         }, async (confirm2) => {
           if (confirm2.isConfirmed) {
-            let index2 = accounting.findIndex((item) => item.id === Number(id));
-            accounting.splice(index2, 1);
-            totalGoal.current.amount -= amount;
-            totalGoal.current.bonus -= bonus;
-            current.amount -= amount;
-            current.bonus -= bonus;
-            await Data$1.set(DataValue$1);
+            delete_item(goal);
             AccountingModal_bs.hide();
           }
         });
         break;
     }
     const accountingTarget = UserSettingValue$1.CurrentAccountings[UserSettingValue$1.CurrentAccountingIndex];
-    renderAccountingDetail(DataValue$1[UserSettingValue$1.CurrentDateKey]["items"], accountingTarget);
-    if (!isUnset)
-      renderGoalDetailModal(goal, data);
+    renderAccountingDetail(get_goal_detail(), build_accounting_detail_object(accountingTarget));
     renderDataContent(DataValue$1, UserSettingValue$1);
+    async function insert_item(keyName) {
+      if (!input.amount.value || !input.name.value) {
+        AccountingModal.querySelector("form").classList.add("was-validated");
+        return;
+      }
+      AccountingValue$1[UserSettingValue$1.CurrentDateKey][keyName].push({
+        id: ++DataValue$1[UserSettingValue$1.CurrentDateKey]["currentId"],
+        name: AccountingModal.querySelector("[name='input-name']").value,
+        amount: input_amount,
+        bonus: input_bonus,
+        date: AccountingModal.querySelector("[name='input-date']").value.replace(/-/g, "/"),
+        created_at: getCurrentFormattedDateTime()
+      });
+      let index2 = DataValue$1[UserSettingValue$1.CurrentDateKey]["items"].findIndex((item) => item.name === keyName);
+      let data = DataValue$1[UserSettingValue$1.CurrentDateKey]["items"][index2];
+      let current = data.current;
+      totalGoal.current.amount += input_amount;
+      totalGoal.current.bonus += input_bonus;
+      current.amount += input_amount;
+      current.bonus += input_bonus;
+      await Data$1.set(DataValue$1);
+      await Accounting$1.set(AccountingValue$1);
+      if (!("unset" in data))
+        renderGoalDetailModal(goal, data);
+    }
+    async function delete_item(keyName) {
+      let index2 = DataValue$1[UserSettingValue$1.CurrentDateKey]["items"].findIndex((item) => item.name === keyName);
+      let data = DataValue$1[UserSettingValue$1.CurrentDateKey]["items"][index2];
+      let current = data.current;
+      const id = AccountingModal.dataset.id;
+      let acc_index = AccountingValue$1[UserSettingValue$1.CurrentDateKey][keyName].findIndex((item) => item.id === Number(id));
+      let acc = AccountingValue$1[UserSettingValue$1.CurrentDateKey][keyName].splice(acc_index, 1)[0];
+      totalGoal.current.amount -= acc.amount;
+      totalGoal.current.bonus -= acc.bonus;
+      current.amount -= acc.amount;
+      current.bonus -= acc.bonus;
+      await Data$1.set(DataValue$1);
+      await Accounting$1.set(AccountingValue$1);
+      if (!("unset" in data))
+        renderGoalDetailModal(goal, data);
+    }
   });
   AccountingModal.addEventListener("show.bs.modal", (e) => {
     if (AccountingModal.dataset.action != "modify") {
@@ -7545,16 +7552,17 @@ async function initEventListener() {
     else
       AccountingModal.querySelector("[name='goal-options']").selectedIndex = 0;
     AccountingModal.querySelector("[name='input-name']").value = "";
-    AccountingModal.querySelector("[name='input-target-money']").value = "";
+    AccountingModal.querySelector("[name='input-amount-money']").value = "";
     AccountingModal.querySelector("[name='input-bonus-money']").value = "";
     AccountingModal.querySelector("form").classList.remove("was-validated");
   });
   AccountingDetailContent.addEventListener("click", (e) => {
+    var _a, _b;
     const target = e.target;
     const itemParent = target.closest(".accounting-item");
     const groupParent = target.closest(".accounting-group");
     if (itemParent) {
-      const goal = itemParent.querySelector(".accounting-goal").dataset.goal;
+      const goal = (_b = (_a = itemParent.querySelector(".accounting-goal")) == null ? void 0 : _a.dataset.goal) != null ? _b : "\u5176\u4ED6\u82B1\u8CBB";
       const name = itemParent.querySelector(".accounting-name").textContent;
       let date = groupParent.querySelector(".accounting-date").dataset.date;
       date = date.replace(/(\d{4})\/(\d{1,2})\/(\d{1,2})/, (match, year, month, day) => {
@@ -7563,11 +7571,24 @@ async function initEventListener() {
       date = new Date(date).toISOString().split("T")[0];
       const amount = itemParent.querySelector(".accounting-money").dataset.amount;
       const bonus = itemParent.querySelector(".accounting-money").dataset.bonus;
-      AccountingModal.querySelector("[name='goal-options']").value = goal;
-      AccountingModal.querySelector("[name='input-date']").value = date;
-      AccountingModal.querySelector("[name='input-name']").value = name;
-      AccountingModal.querySelector("[name='input-target-money']").value = amount;
-      AccountingModal.querySelector("[name='input-bonus-money']").value = bonus == 0 ? "" : bonus;
+      const select = AccountingModal.querySelector("[name='goal-options']");
+      select.value = goal;
+      select.dataset.goal = goal;
+      const input = {
+        name: AccountingModal.querySelector("[name='input-name']"),
+        date: AccountingModal.querySelector("[name='input-date']"),
+        amount: AccountingModal.querySelector("[name='input-amount-money']"),
+        bonus: AccountingModal.querySelector("[name='input-bonus-money']")
+      };
+      input.name.value = name;
+      input.date.value = date;
+      input.amount.value = amount;
+      input.bonus.value = bonus == 0 ? "" : bonus;
+      select.dataset.old = select.value;
+      input.name.dataset.old = input.name.value;
+      input.date.dataset.old = input.date.value;
+      input.amount.dataset.old = input.amount.value;
+      input.bonus.dataset.old = input.bonus.value;
       AccountingModal.dataset.action = "modify";
       AccountingModal.dataset.id = itemParent.dataset.id;
       AccountingModal_bs.show();
@@ -7733,8 +7754,14 @@ async function initEventListener() {
     }
     await UserSetting$1.set(UserSettingValue$1);
     Data$1 = await initData();
+    Accounting$1 = await initAccounting();
+    if (UserSettingValue$1.DebugMode) {
+      await Data$1.demo();
+      await Accounting$1.demo();
+    }
     DataValue$1 = await Data$1.get();
-    await initDataContent(DataValue$1, UserSettingValue$1);
+    AccountingValue$1 = await Accounting$1.get();
+    await initDataContent(DataValue$1, UserSettingValue$1, AccountingValue$1);
   });
   function handleItemsStart(e) {
     isLongPress = false;
@@ -7803,7 +7830,7 @@ async function initEventListener() {
         const nameArray = checkedArray.map((item) => item.closest(".items").querySelector("label").textContent);
         let totalGoal = DataValue$1[UserSettingValue$1.CurrentDateKey].totalGoal.current;
         for (let key of nameArray) {
-          let v = DataValue$1[UserSettingValue$1.CurrentDateKey].items.normal.find((item) => item.name === key).current;
+          let v = DataValue$1[UserSettingValue$1.CurrentDateKey].items.find((item) => item.name === key).current;
           totalGoal.amount -= v.amount;
           totalGoal.bonus -= v.bonus;
         }
@@ -7817,7 +7844,7 @@ async function initEventListener() {
           CarouselAccountingControl.querySelector("button.carousel-control-next").click();
         } else {
           const accountingTarget2 = UserSettingValue$1.CurrentAccountings[UserSettingValue$1.CurrentAccountingIndex];
-          renderAccountingDetail(DataValue$1[UserSettingValue$1.CurrentDateKey]["items"], accountingTarget2);
+          renderAccountingDetail(get_goal_detail(), build_accounting_detail_object(accountingTarget2));
         }
         await showAlert({
           title: "\u5DF2\u522A\u9664\u9078\u4E2D\u76EE\u6A19",
@@ -7831,14 +7858,16 @@ async function initEventListener() {
     await UserSetting$1.set(UserSettingValue$1);
     const accountingTarget = UserSettingValue$1.CurrentAccountings[index2];
     renderCarouselAccountingData(accountingTarget);
-    renderAccountingDetail(DataValue$1[UserSettingValue$1.CurrentDateKey]["items"], accountingTarget);
+    renderAccountingDetail(get_goal_detail(), build_accounting_detail_object(accountingTarget));
   }
   function itemSelectedMode(type = "") {
     if (type == "close") {
       HomeContent.querySelectorAll(".items").forEach((item) => {
         item.querySelector(".select_item").checked = false;
         item.classList.remove("press-active");
-        item.querySelector(".nav_item").classList.add("d-none");
+        HomeContent.querySelectorAll(".nav_item").forEach((s_item) => {
+          s_item.classList.add("d-none");
+        });
       });
       delete HomeContent.dataset.checkboxActive;
       ItemMainNav.classList.add("d-none");
@@ -7866,12 +7895,25 @@ async function initEventListener() {
           type: "tab",
           callback: () => {
             Nav.querySelector(`[data-tab-target="${param.tab_id}"]`).click();
-            console.log(`[data-sort-name="${param.item_name}"]`);
             HomeContent.querySelector(`[data-sort-name="${param.item_name}"]`).click();
           }
         });
         break;
     }
+  }
+  function get_goal_detail() {
+    return DataValue$1[UserSettingValue$1.CurrentDateKey].items.reduce((acc, item) => {
+      acc[item.name] = { color: item.color };
+      return acc;
+    }, {});
+  }
+  function build_accounting_detail_object(accountingTarget) {
+    if (accountingTarget === "\u7E3D\u89BD") {
+      return AccountingValue$1[UserSettingValue$1.CurrentDateKey];
+    }
+    return {
+      [accountingTarget]: AccountingValue$1[UserSettingValue$1.CurrentDateKey][accountingTarget]
+    };
   }
   function resetStatus() {
     ItemMainNav.classList.add("d-none");
@@ -7900,7 +7942,7 @@ async function updateDataItemsSort(newOrder) {
     map2[name] = index2;
     return map2;
   }, {});
-  DataValue$1[UserSettingValue$1.CurrentDateKey]["items"]["normal"].sort((a, b) => orderMap[a.name] - orderMap[b.name]);
+  DataValue$1[UserSettingValue$1.CurrentDateKey]["items"].sort((a, b) => orderMap[a.name] - orderMap[b.name]);
   await Data$1.set(DataValue$1);
   await refreshAccountings();
 }
@@ -7962,7 +8004,7 @@ var loadModule = (cmpMeta, hostRef, hmrVersionId) => {
       case "jeep-sqlite":
         return __vitePreload(() => import(
           /* webpackMode: "lazy" */
-          "./jeep-sqlite.entry.5c31fd40.js"
+          "./jeep-sqlite.entry.672385ab.js"
         ), true ? [] : void 0).then(processMod, consoleError);
     }
   }
@@ -9012,13 +9054,14 @@ const defineCustomElements = async (win2, options) => {
   }
 })();
 registerPlugin("CapacitorSQLite", {
-  web: () => __vitePreload(() => import("./web.ba2b6539.js"), true ? [] : void 0).then((m) => new m.CapacitorSQLiteWeb()),
+  web: () => __vitePreload(() => import("./web.53296d23.js"), true ? [] : void 0).then((m) => new m.CapacitorSQLiteWeb()),
   electron: () => window.CapacitorCustomPlatform.plugins.CapacitorSQLite
 });
 defineCustomElements();
-let UserSetting, Data;
-let UserSettingValue, DataValue;
+let UserSetting, Data, Accounting;
+let UserSettingValue, DataValue, AccountingValue;
 window.addEventListener("DOMContentLoaded", async () => {
+  document.querySelector("#app-version").innerHTML = CONFIG.APP_VERSION;
   UserSetting = await initUserSetting();
   UserSettingValue = await UserSetting.get();
   UserSettingValue.CurrentAccounting = "\u7E3D\u89BD";
@@ -9026,15 +9069,18 @@ window.addEventListener("DOMContentLoaded", async () => {
   await UserSetting.set(UserSettingValue);
   Data = await initData();
   DataValue = await Data.get();
+  Accounting = await initAccounting();
+  AccountingValue = await Accounting.get();
   let date = UserSettingValue.CurrentDateKey;
   if (!checkHasData(DataValue, date)) {
     DataValue[date] = Data.getDefault(date)[date];
     DataValue = await Data.set(DataValue);
   }
-  if (UserSettingValue.DebugMode == true) {
+  if (UserSettingValue.DebugMode == true)
     await Data.demo();
-  }
-  await initDataContent(DataValue, UserSettingValue);
+  else
+    await checkAndUpdateVersionChange();
+  await initDataContent(DataValue, UserSettingValue, AccountingValue);
   await initEventListener();
   LocateHomePage();
   {
@@ -9049,6 +9095,44 @@ function LocateHomePage() {
   if (UserSettingValue.HomeLocation == "accountingDetail") {
     document.querySelector("nav .nav-link[data-tab-target='#accountingDetail']").click();
   }
+}
+async function checkAndUpdateVersionChange() {
+  if (!(UserSettingValue == null ? void 0 : UserSettingValue.AppVersion)) {
+    await updateVersionChange0_8_0();
+  }
+  if (isVersionLessThan(UserSettingValue.AppVersion, "0.8.0")) {
+    await updateVersionChange0_8_0();
+  }
+}
+async function updateVersionChange0_8_0() {
+  AccountingValue = {};
+  for (let date of Object.keys(DataValue)) {
+    for (let item of DataValue[date].items) {
+      AccountingValue[date] = {};
+      let keyName = item.name;
+      if (!(keyName in AccountingValue[date])) {
+        AccountingValue[date][keyName] = [];
+      } else {
+        AccountingValue[date][keyName].push(DataValue[date].items[keyName]);
+      }
+    }
+  }
+  await Accounting.set(AccountingValue);
+  UserSettingValue.AppVersion = "0.8.0";
+  await UserSetting.set(UserSettingValue);
+}
+function isVersionLessThan(currentVersion, targetVersion) {
+  const currentParts = currentVersion.split(".").map(Number);
+  const targetParts = targetVersion.split(".").map(Number);
+  for (let i = 0; i < Math.max(currentParts.length, targetParts.length); i++) {
+    const current = currentParts[i] || 0;
+    const target = targetParts[i] || 0;
+    if (current < target)
+      return true;
+    if (current > target)
+      return false;
+  }
+  return false;
 }
 var style = "";
 var custom = "";
