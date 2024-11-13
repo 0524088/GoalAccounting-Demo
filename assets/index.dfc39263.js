@@ -576,7 +576,7 @@ registerPlugin("CapacitorHttp", {
   web: () => new CapacitorHttpPluginWeb()
 });
 const Preferences = registerPlugin("Preferences", {
-  web: () => __vitePreload(() => import("./web.8990ae00.js"), true ? [] : void 0).then((m) => new m.PreferencesWeb())
+  web: () => __vitePreload(() => import("./web.a6d08e51.js"), true ? [] : void 0).then((m) => new m.PreferencesWeb())
 });
 const APP_NAME = "\u9918\u984D\u5F0F\u8A18\u5E33APP";
 const APP_VERSION = "0.8.0";
@@ -3201,10 +3201,10 @@ var Encoding;
   Encoding2["UTF16"] = "utf16";
 })(Encoding || (Encoding = {}));
 registerPlugin("Filesystem", {
-  web: () => __vitePreload(() => import("./web.821bd6aa.js"), true ? [] : void 0).then((m) => new m.FilesystemWeb())
+  web: () => __vitePreload(() => import("./web.bae97802.js"), true ? [] : void 0).then((m) => new m.FilesystemWeb())
 });
 const App = registerPlugin("App", {
-  web: () => __vitePreload(() => import("./web.e7b55657.js"), true ? [] : void 0).then((m) => new m.AppWeb())
+  web: () => __vitePreload(() => import("./web.ee5c5bf0.js"), true ? [] : void 0).then((m) => new m.AppWeb())
 });
 const custom$1 = {
   BarAlertRange: {
@@ -8004,7 +8004,7 @@ var loadModule = (cmpMeta, hostRef, hmrVersionId) => {
       case "jeep-sqlite":
         return __vitePreload(() => import(
           /* webpackMode: "lazy" */
-          "./jeep-sqlite.entry.672385ab.js"
+          "./jeep-sqlite.entry.28d5a074.js"
         ), true ? [] : void 0).then(processMod, consoleError);
     }
   }
@@ -9054,7 +9054,7 @@ const defineCustomElements = async (win2, options) => {
   }
 })();
 registerPlugin("CapacitorSQLite", {
-  web: () => __vitePreload(() => import("./web.53296d23.js"), true ? [] : void 0).then((m) => new m.CapacitorSQLiteWeb()),
+  web: () => __vitePreload(() => import("./web.28a5633b.js"), true ? [] : void 0).then((m) => new m.CapacitorSQLiteWeb()),
   electron: () => window.CapacitorCustomPlatform.plugins.CapacitorSQLite
 });
 defineCustomElements();
@@ -9065,6 +9065,7 @@ window.addEventListener("DOMContentLoaded", async () => {
   UserSetting = await initUserSetting();
   UserSettingValue = await UserSetting.get();
   UserSettingValue.CurrentAccounting = "\u7E3D\u89BD";
+  UserSettingValue.CurrentAccountingIndex = 0;
   UserSettingValue.CurrentDateKey = getCurrentFormattedDateTime("yyyy/dd");
   await UserSetting.set(UserSettingValue);
   Data = await initData();
