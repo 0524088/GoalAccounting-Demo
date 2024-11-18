@@ -1,4 +1,4 @@
-import { W as WebPlugin, b as buildRequestInit, E as Encoding } from "./index.dfc39263.js";
+import { W as WebPlugin, b as buildRequestInit, E as Encoding } from "./index.3c918db1.js";
 function resolve(path) {
   const posix = path.split("/").filter((item) => item !== ".");
   const newPosix = [];

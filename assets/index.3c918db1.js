@@ -576,11 +576,11 @@ registerPlugin("CapacitorHttp", {
   web: () => new CapacitorHttpPluginWeb()
 });
 const Preferences = registerPlugin("Preferences", {
-  web: () => __vitePreload(() => import("./web.a6d08e51.js"), true ? [] : void 0).then((m) => new m.PreferencesWeb())
+  web: () => __vitePreload(() => import("./web.0bb5b6ea.js"), true ? [] : void 0).then((m) => new m.PreferencesWeb())
 });
 const APP_NAME = "\u9918\u984D\u5F0F\u8A18\u5E33APP";
 const APP_VERSION = "0.8.0";
-const DEBUG_MODE = false;
+const DEBUG_MODE = true;
 var CONFIG = {
   APP_NAME,
   APP_VERSION,
@@ -3201,10 +3201,10 @@ var Encoding;
   Encoding2["UTF16"] = "utf16";
 })(Encoding || (Encoding = {}));
 registerPlugin("Filesystem", {
-  web: () => __vitePreload(() => import("./web.bae97802.js"), true ? [] : void 0).then((m) => new m.FilesystemWeb())
+  web: () => __vitePreload(() => import("./web.53b19892.js"), true ? [] : void 0).then((m) => new m.FilesystemWeb())
 });
 const App = registerPlugin("App", {
-  web: () => __vitePreload(() => import("./web.ee5c5bf0.js"), true ? [] : void 0).then((m) => new m.AppWeb())
+  web: () => __vitePreload(() => import("./web.92fbb7f1.js"), true ? [] : void 0).then((m) => new m.AppWeb())
 });
 const custom$1 = {
   BarAlertRange: {
@@ -7130,16 +7130,17 @@ async function initEventListener() {
         }
         month = month < 10 ? "0" + month : month;
         previousMonth = previousMonth < 10 ? "0" + previousMonth : previousMonth.toString();
-        let thisDate = `${year}-${month}`;
-        let previousDate = `${previousYear}-${previousMonth}`;
-        if (!((_b = DataValue$1[previousDate]) == null ? void 0 : _b.items)) {
+        let thisDate = `${year}/${month}`;
+        let previousDate = `${previousYear}/${previousMonth}`;
+        let previous_date_items = (_b = DataValue$1[previousDate]) == null ? void 0 : _b.items;
+        if (!previous_date_items || !(previous_date_items.length > 1)) {
           showAlert({
             title: "\u5C1A\u7121\u4EFB\u4F55\u76EE\u6A19\uFF0C\u8ACB\u5148\u65B0\u589E\u904E\u4E00\u6B21\u76EE\u6A19",
             icon: "error"
           });
           return;
         }
-        if (DataValue$1[thisDate]["items"].length > 0) {
+        if (DataValue$1[thisDate]["items"].length > 1) {
           showAlert({
             title: `\u78BA\u5B9A\u8981\u8907\u88FD${previousDate}\u7684\u76EE\u6A19\u55CE\uFF1F\u9019\u5C07\u6703\u8907\u5BEB\u9019\u500B\u6708\u5DF2\u8A2D\u5B9A\u7684\u76EE\u6A19`,
             icon: "warning",
@@ -7153,7 +7154,20 @@ async function initEventListener() {
           await copyPreviousGoal();
         }
         async function copyPreviousGoal() {
-          DataValue$1[thisDate] = JSON.parse(JSON.stringify(DataValue$1[previousDate]));
+          let data = JSON.parse(JSON.stringify(DataValue$1[previousDate]));
+          for (let key in data) {
+            if (key === "totalGoal") {
+              data[key].current.amount = 0;
+              data[key].current.bonus = 0;
+            }
+            if (key === "items") {
+              for (let item of data[key]) {
+                item.current.amount = 0;
+                item.current.bonus = 0;
+              }
+            }
+          }
+          DataValue$1[thisDate] = data;
           await Data$1.set(DataValue$1);
           showAlert({
             title: "\u5DF2\u8907\u88FD\u4E0A\u6B21\u7684\u76EE\u6A19",
@@ -8004,7 +8018,7 @@ var loadModule = (cmpMeta, hostRef, hmrVersionId) => {
       case "jeep-sqlite":
         return __vitePreload(() => import(
           /* webpackMode: "lazy" */
-          "./jeep-sqlite.entry.28d5a074.js"
+          "./jeep-sqlite.entry.85515b1f.js"
         ), true ? [] : void 0).then(processMod, consoleError);
     }
   }
@@ -9054,7 +9068,7 @@ const defineCustomElements = async (win2, options) => {
   }
 })();
 registerPlugin("CapacitorSQLite", {
-  web: () => __vitePreload(() => import("./web.28a5633b.js"), true ? [] : void 0).then((m) => new m.CapacitorSQLiteWeb()),
+  web: () => __vitePreload(() => import("./web.40d5fe17.js"), true ? [] : void 0).then((m) => new m.CapacitorSQLiteWeb()),
   electron: () => window.CapacitorCustomPlatform.plugins.CapacitorSQLite
 });
 defineCustomElements();
@@ -9084,9 +9098,6 @@ window.addEventListener("DOMContentLoaded", async () => {
   await initDataContent(DataValue, UserSettingValue, AccountingValue);
   await initEventListener();
   LocateHomePage();
-  {
-    document.querySelector("#setting-debug").classList.add("d-none");
-  }
   setTimeout(() => {
     document.querySelector("#app-loading").classList.add("d-none");
     document.querySelector("#app").classList.remove("d-none");
